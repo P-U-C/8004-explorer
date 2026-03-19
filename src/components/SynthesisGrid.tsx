@@ -196,6 +196,79 @@ export default function SynthesisGrid() {
         </p>
       </div>
 
+      {/* Featured Project */}
+      {(() => {
+        const featured = agents.find((a) => a.slug === 'b1e55ed-47f1' || a.name.toLowerCase() === 'b1e55ed')
+        if (!featured) return null
+        return (
+          <div
+            className="mb-8 border border-accent/40 rounded-2xl p-6 bg-gradient-to-br from-accent/5 to-transparent cursor-pointer hover:border-accent/60 transition-all"
+            onClick={() => setSelected(featured)}
+          >
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-accent bg-accent/10 px-2 py-0.5 rounded-full">
+                Featured
+              </span>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-5">
+              {featured.coverImageURL && (
+                <img
+                  src={featured.coverImageURL}
+                  alt={featured.name}
+                  className="w-full sm:w-48 h-32 rounded-xl object-cover bg-surface shrink-0"
+                  onError={(e) => {
+                    ;(e.target as HTMLImageElement).style.display = 'none'
+                  }}
+                />
+              )}
+              <div className="flex-1 min-w-0">
+                <h2 className="text-xl font-bold text-accent mb-1">{featured.name}</h2>
+                {featured.team && (
+                  <p className="text-xs text-muted mb-2">by {featured.team}</p>
+                )}
+                <p className="text-sm text-gray-300 line-clamp-3 mb-3 leading-relaxed">
+                  {featured.description.slice(0, 300)}
+                </p>
+                <div className="flex flex-wrap gap-1.5 mb-3">
+                  {featured.tracks.map((t) => (
+                    <span
+                      key={t}
+                      className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-accent/10 text-accent/70"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex items-center gap-4 text-xs font-mono">
+                  {featured.deployedURL && (
+                    <a
+                      href={featured.deployedURL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-accent hover:text-accent/80 transition-colors"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      🌐 Live Oracle
+                    </a>
+                  )}
+                  {featured.repoURL && (
+                    <a
+                      href={featured.repoURL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-400 hover:text-white transition-colors"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      📦 Repository
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      })()}
+
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-3 mb-6">
         <input
