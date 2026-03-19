@@ -18,14 +18,22 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <div className="flex-1 max-w-md">
             <SearchBar />
           </div>
-          <a
-            href={`https://basescan.org/address/0x8004A169FB4a3325136EB29fA0ceB6D2e539a432`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs font-mono text-muted hover:text-accent transition-colors shrink-0 hidden sm:block"
-          >
-            Contract ↗
-          </a>
+          <div className="flex items-center gap-4 shrink-0 hidden sm:flex">
+            <Link
+              to="/synthesis"
+              className="text-xs font-mono text-muted hover:text-accent transition-colors"
+            >
+              Synthesis 2026
+            </Link>
+            <a
+              href="https://basescan.org/address/0x8004A169FB4a3325136EB29fA0ceB6D2e539a432"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-mono text-muted hover:text-accent transition-colors"
+            >
+              Contract ↗
+            </a>
+          </div>
         </div>
       </header>
 
