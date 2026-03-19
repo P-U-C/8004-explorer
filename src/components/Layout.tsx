@@ -9,10 +9,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
           <Link to="/" className="flex items-center gap-2 shrink-0">
             <div className="w-8 h-8 rounded bg-accent/10 border border-accent/30 flex items-center justify-center">
-              <span className="text-accent font-mono text-sm font-bold">8k</span>
+              <span className="text-accent font-mono text-sm font-bold">S</span>
             </div>
             <span className="font-mono text-sm text-muted hidden sm:block">
-              ERC-8004 <span className="text-white">Explorer</span>
+              Synthesis <span className="text-white">2026</span>
             </span>
           </Link>
           <div className="flex-1 max-w-md">
