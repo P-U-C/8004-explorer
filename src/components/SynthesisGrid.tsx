@@ -150,11 +150,46 @@ export default function SynthesisGrid() {
   const [selected, setSelected] = useState<SynthesisAgent | null>(null)
 
   useEffect(() => {
-    fetch('/synthesis-agents.json')
-      .then((r) => r.json())
-      .then((data) => setAgents(data))
-      .catch(() => {})
-      .finally(() => setLoading(false))
+    async function fetchAll() {
+      try {
+        const all: SynthesisAgent[] = []
+        let page = 1
+        const limit = 100
+        while (true) {
+          const res = await fetch(
+            `https://synthesis.devfolio.co/projects?page=${page}&limit=${limit}`
+          )
+          if (!res.ok) break
+          const json = await res.json()
+          const items: SynthesisAgent[] = (json.data || []).map((p: Record<string, unknown>) => ({
+            ...p,
+            tracks: Array.isArray(p.tracks)
+              ? (p.tracks as Record<string, unknown>[]).map((t) =>
+                  typeof t === 'string' ? t : String(t.title || t.name || t)
+                )
+              : [],
+            members: Array.isArray(p.members) ? p.members : [],
+            team:
+              typeof p.team === 'object' && p.team !== null
+                ? String((p.team as Record<string, unknown>).name || '')
+                : String(p.team || ''),
+          }))
+          all.push(...items)
+          if (items.length < limit) break
+          page++
+        }
+        setAgents(all.length > 0 ? all : await fetch('/synthesis-agents.json').then((r) => r.json()))
+      } catch {
+        // fallback to static file
+        try {
+          const data = await fetch('/synthesis-agents.json').then((r) => r.json())
+          setAgents(data)
+        } catch {}
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchAll()
   }, [])
 
   const allTracks = Array.from(new Set(agents.flatMap((a) => a.tracks))).sort()
