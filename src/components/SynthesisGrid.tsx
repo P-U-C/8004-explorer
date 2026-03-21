@@ -297,6 +297,17 @@ export default function SynthesisGrid() {
                       📦 Repository
                     </a>
                   )}
+                  {featured.videoURL && (
+                    <a
+                      href={featured.videoURL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-accent/80 hover:text-accent transition-colors font-semibold"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      ▶ Watch Demo
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
