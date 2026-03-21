@@ -308,6 +308,15 @@ export default function SynthesisGrid() {
                       ▶ Watch Demo
                     </a>
                   )}
+                  <a
+                    href="https://oracle.b1e55ed.permanentupperclass.com/api/v1/spi/producers"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3 py-1 rounded-full bg-accent/20 text-accent text-xs font-mono font-semibold hover:bg-accent/30 transition-colors border border-accent/30"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    🙏 Become a Producer
+                  </a>
                 </div>
               </div>
             </div>
